@@ -82,6 +82,11 @@ func main() {
 			return
 		}
 
+		// Lock the bot to the server it is configured for
+		if m.ChannelID != cfg.DiscordChannelID {
+			return
+		}
+
 		if err := botService.HandleMessage(ctx, m.Content, m.ChannelID); err != nil {
 			slog.ErrorContext(ctx, "failed to handle message", "error", err)
 		}

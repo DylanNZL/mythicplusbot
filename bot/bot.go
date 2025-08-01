@@ -41,8 +41,8 @@ const (
 	Command = "!mythicplusbot"
 
 	helpMessage = "This bot tracks characters M+ scores and will post updates to the channel whenever they increase:\n" +
-		"\n- To add a character send: `!mythicplusbot character add <character> <realm>`" +
-		"\n- To remove a character send: `!mythicplusbot character remove <character> <realm>`" +
+		"\n- To add a character send: `!mythicplusbot add <character> <realm>`" +
+		"\n- To remove a character send: `!mythicplusbot remove <character> <realm>`" +
 		"\n- To list the top `n` scores send: `!mythicplusbot scores [-n 10]`" +
 		"\n- To update scores outside the 30 minute window send: `!mythicplusbot update`"
 
