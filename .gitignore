@@ -1,0 +1,10 @@
+# Build outpu
+bin
+
+# IDE
+.idea
+*.iml
+
+# files
+config.yml
+*.sqlite

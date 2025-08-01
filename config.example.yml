@@ -1,0 +1,8 @@
+blizzardClientId: "YOUR_CLIENT_ID"
+blizzardClientSecret: "YOUR_CLIENT_SECRET"
+raiderIOAccessKey: "YOUR_RAIDER_IO_TOKEN"
+discordToken: "YOUR_DISCORD_TOKEN"
+discordChannelId: "THE_CHANNEL_TO_SUBSCRIBE_TO"
+databaseLocation: "./mythicplusdiscordbot.sqlite"
+logLevel: 0
+updaterFrequency: 30

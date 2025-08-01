@@ -1,0 +1,28 @@
+# Options for analysis running.
+run:
+  tests: false
+  # Skip files from linting
+  skip-files:
+    - "blizzard/mythickeystoneprofile.go"
+
+linters:
+  enable-all: true
+  disable:
+    - gochecknoinits
+    - depguard
+    - gochecknoglobals
+    - varnamelen
+    - wrapcheck
+    - godox
+    - tagalign
+    - paralleltest
+    - dupl
+    - wsl
+    - nonamedreturns
+    - exhaustruct
+    - nlreturn
+    - forbidigo
+    - tagliatelle
+
+linters-settings.misspell:
+  locale: "UK"
