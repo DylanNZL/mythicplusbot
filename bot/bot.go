@@ -46,7 +46,7 @@ const (
 		"\n- To list the top `n` scores send: `!mythicplusbot scores [-n 10]`" +
 		"\n- To update scores outside the 30 minute window send: `!mythicplusbot update`"
 
-	defaultRows = 10
+	defaultRows = 20
 )
 
 func NewBot(messageSender discord.SenderIface, updater Updater, characterService CharacterService) *Bot {
