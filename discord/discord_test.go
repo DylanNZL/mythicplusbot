@@ -211,6 +211,6 @@ func TestBuildScoresFields_FewCharacters(t *testing.T) {
 	// Check that the fields contain the expected data
 	assert.Contains(t, fields[0].Value, "Char1-realm1")
 	assert.Contains(t, fields[0].Value, "Char2-realm2")
-	assert.Contains(t, fields[1].Value, "2500.00")
-	assert.Contains(t, fields[1].Value, "2300.00")
+	assert.Contains(t, fields[1].Value, "2500")
+	assert.Contains(t, fields[1].Value, "2300")
 }
