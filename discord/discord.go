@@ -3,6 +3,7 @@ package discord
 import (
 	"context"
 	"fmt"
+	"sort"
 
 	"github.com/DylanNZL/mythicplusbot/db"
 	"github.com/bwmarrin/discordgo"
@@ -38,6 +39,10 @@ func (d *Sender) SendComplexMessage(_ context.Context, channelID string, message
 }
 
 func BuildScoresMessage(characters []db.Character) discordgo.MessageSend {
+	sort.Slice(characters, func(i, j int) bool {
+		return characters[i].OverallScore > characters[j].OverallScore
+	})
+
 	return discordgo.MessageSend{
 		Embeds: []*discordgo.MessageEmbed{
 			{
