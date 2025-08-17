@@ -124,7 +124,7 @@ func (s *Service) updateCharacter(ctx context.Context, discordChannelID string, 
 		return fmt.Errorf("failed to update character score: %w", err)
 	}
 
-	if err := s.messageSender.SendComplexMessage(ctx, discordChannelID, discord.BuildScoreUpdateMessage(character, oldScore)); err != nil {
+	if err := s.messageSender.SendComplexMessage(ctx, discordChannelID, discord.BuildScoreUpdateMessage(ctx, character, *rCharacter, oldScore)); err != nil {
 		return fmt.Errorf("failed to send message: %w", err)
 	}
 

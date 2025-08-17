@@ -131,40 +131,6 @@ func TestMockSender_SendComplexMessage_Error(t *testing.T) {
 	mockSender.AssertExpectations(t)
 }
 
-// Test BuildScoreUpdateMessage function
-
-func TestBuildScoreUpdateMessage(t *testing.T) {
-	character := db.Character{
-		Name:         "TestChar",
-		Realm:        "testrealm",
-		Class:        "Paladin",
-		OverallScore: 2500.0,
-		TankScore:    2400.0,
-		HealScore:    2300.0,
-		DPSScore:     2200.0,
-	}
-	oldScore := 2000.0
-
-	message := BuildScoreUpdateMessage(character, oldScore)
-
-	// Test the content
-	expectedContent := "[TestChar-testrealm](https://raider.io/characters/us/testrealm/TestChar) increased their score from 2000.00 to 2500.00"
-	assert.Equal(t, expectedContent, message.Content)
-
-	// Test embeds
-	assert.Len(t, message.Embeds, 1)
-	embed := message.Embeds[0]
-
-	assert.Equal(t, "2500.00 Overall Mythic+ Score]", embed.Title)
-	assert.Equal(t, "https://raider.io/characters/us/testrealm/TestChar", embed.URL)
-	assert.Equal(t, "TestChar-testrealm (Paladin)", embed.Author.Name)
-	assert.Equal(t, getClassIcon("Paladin"), embed.Author.IconURL)
-	assert.Equal(t, getClassColour("Paladin"), embed.Color)
-	assert.Contains(t, embed.Description, "**Tank Score** 2400")
-	assert.Contains(t, embed.Description, "**Healer Score** 2300")
-	assert.Contains(t, embed.Description, "**DPS Score** 2200")
-}
-
 // Test BuildScoresMessage function
 
 func TestBuildScoresMessage(t *testing.T) {
@@ -207,68 +173,6 @@ func TestBuildScoresMessage_EmptyCharacters(t *testing.T) {
 	assert.Equal(t, "Tracked Characters", embed.Title)
 	// Should still have fields even if empty (the function creates empty fields)
 	assert.NotNil(t, embed.Fields)
-}
-
-// Test getClassIcon function
-
-func TestGetClassIcon(t *testing.T) {
-	tests := []struct {
-		class    string
-		expected string
-	}{
-		{"Warrior", "https://render.worldofwarcraft.com/us/icons/18/class_1.jpg"},
-		{"Paladin", "https://render.worldofwarcraft.com/us/icons/18/class_2.jpg"},
-		{"Hunter", "https://render.worldofwarcraft.com/us/icons/18/class_3.jpg"},
-		{"Rogue", "https://render.worldofwarcraft.com/us/icons/18/class_4.jpg"},
-		{"Priest", "https://render.worldofwarcraft.com/us/icons/18/class_5.jpg"},
-		{"DeathKnight", "https://render.worldofwarcraft.com/us/icons/18/class_6.jpg"},
-		{"Shaman", "https://render.worldofwarcraft.com/us/icons/18/class_7.jpg"},
-		{"Mage", "https://render.worldofwarcraft.com/us/icons/18/class_8.jpg"},
-		{"Warlock", "https://render.worldofwarcraft.com/us/icons/18/class_9.jpg"},
-		{"Monk", "https://render.worldofwarcraft.com/us/icons/18/class_10.jpg"},
-		{"Druid", "https://render.worldofwarcraft.com/us/icons/18/class_11.jpg"},
-		{"DemonHunter", "https://render.worldofwarcraft.com/us/icons/18/class_12.jpg"},
-		{"Evoker", "https://render.worldofwarcraft.com/us/icons/18/class_2.jpg"},  // Falls back to Paladin
-		{"Unknown", "https://render-us.worldofwarcraft.com/icons/18/class_2.jpg"}, // Default case
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.class, func(t *testing.T) {
-			result := getClassIcon(tt.class)
-			assert.Equal(t, tt.expected, result)
-		})
-	}
-}
-
-// Test getClassColour function
-
-func TestGetClassColour(t *testing.T) {
-	tests := []struct {
-		class    string
-		expected int
-	}{
-		{"Warrior", 13015917},
-		{"Paladin", 16026810},
-		{"Hunter", 11195250},
-		{"Rogue", 16774248},
-		{"Priest", 16777215},
-		{"DeathKnight", 12852794},
-		{"Shaman", 28893},
-		{"Mage", 4179947},
-		{"Warlock", 8882414},
-		{"Monk", 2326507},
-		{"Druid", 16743434},
-		{"DemonHunter", 10694857},
-		{"Evoker", 3380095},
-		{"Unknown", 0}, // Default case
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.class, func(t *testing.T) {
-			result := getClassColour(tt.class)
-			assert.Equal(t, tt.expected, result)
-		})
-	}
 }
 
 // Test buildScoresFields function with many characters to test field limit

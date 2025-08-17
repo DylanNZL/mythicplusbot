@@ -1,5 +1,7 @@
 build:
-	go build main.go
+	mkdir -p bin
+	go build -o ./bin/mythicplusbot main.go
+
 run:
 	go run main.go
 

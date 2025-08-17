@@ -51,7 +51,7 @@ func (c *Client) GetCharacter(ctx context.Context, realm string, name string) (*
 		"region":     []string{"us"},
 		"realm":      []string{realm},
 		"name":       []string{name},
-		"fields":     []string{"mythic_plus_scores_by_season:current,mythic_plus_ranks"},
+		"fields":     []string{"mythic_plus_scores_by_season:current,mythic_plus_ranks,mythic_plus_recent_runs"},
 	}
 
 	u.RawQuery = query.Encode()
